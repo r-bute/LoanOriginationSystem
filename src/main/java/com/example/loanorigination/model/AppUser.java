@@ -3,13 +3,13 @@ package com.example.loanorigination.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Entity
-@Table(name = "users")
+@Table(name = "app_users")
 @Data // Lombok annotation to generate getters, setters, toString, etc.
 @NoArgsConstructor // Lombok annotation for the no-argument constructor
 @AllArgsConstructor // Lombok annotation for the all-argument constructor
-public class User {
-
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
