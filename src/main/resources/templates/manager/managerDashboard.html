@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/manager/managerDashboard">Dashboard</a></li>
+            <li><a href="/manager/assignLoans">Assign Loans</a></li>
+            <li><a href="/manager/teamOverview">Team Overview</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h1>Manager Dashboard</h1>
+        <p>Welcome to the Manager Dashboard. Here you can assign loans to loan officers and view team performance.</p>
+    </section>
+</main>
+
+<footer>
+    <p>© 2024 Loan Origination System. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

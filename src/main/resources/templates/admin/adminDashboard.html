@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/admin/adminDashboard">Dashboard</a></li>
+            <li><a href="/admin/manageUsers">Manage Users</a></li>
+            <li><a href="/admin/settings">Settings</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h1>Admin Dashboard</h1>
+        <p>Welcome to the Admin Dashboard! Here you can manage users, view reports, and access administrative settings.</p>
+    </section>
+
+    <section>
+        <h2>Admin Actions</h2>
+        <ul>
+            <li><a href="/admin/manageUsers">Manage Users</a></li>
+            <li><a href="/admin/reports">View Reports</a></li>
+            <li><a href="/admin/settings">Settings</a></li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <p>© 2024 Loan Origination System. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

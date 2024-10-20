@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Register</title>
-</head>
-<body>
-<h1>Register</h1>
-<form th:action="@{/register}" method="post" th:object="${appUser}">
-    <div>
+    <head>
+        <title>User Registration</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+        <h1>User Registration</h1>
+        <form action="#" th:action="@{/register}" th:object="${appUser}" method="post">
+
         <label for="username">Username:</label>
-        <input type="text" id="username" th:field="*{username}" required />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}" required />
-    </div>
-    <div>
-        <label for="role">Role:</label>
-        <select id="role" th:field="*{role}">
-            <option value="USER">User</option>
-            <option value="ADMIN">Admin</option>
-        </select>
-    </div>
-    <div>
-        <input type="submit" value="Register" />
-    </div>
-</form>
-</body>
+            <input type="text" id="username" name="username" th:field="*{username}" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" th:field="*{password}" required>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" th:field="*{role}">
+                <option value="APPUSER">AppUser</option>
+                <option value="LOAN_OFFICER">Loan Officer</option>
+                <option value="MANAGER">Manager</option>
+                <option value="UNDERWRITER">Underwriter</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+
+            <input type="submit" value="Register">
+        </form>
+
+    </body>
 </html>

@@ -6,9 +6,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 public class SecurityConfig {
+
+    private final AuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+    public SecurityConfig(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -19,19 +26,24 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/register", "/login", "/error", "/css/**").permitAll()  // Allow public access to /register
+                        .requestMatchers("/register", "/login", "/error", "/css/**", "/js/**").permitAll()  // Allow public access to these pages
+                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Only ADMIN can access /admin
+                        .requestMatchers("/manager/**").hasRole("MANAGER")  // Only MANAGER can access /manager
+                        .requestMatchers("/underwriter/**").hasRole("UNDERWRITER")  // Only UNDERWRITER can access /underwriter
+                        .requestMatchers("/loan-officer/**").hasRole("LOAN_OFFICER")  // Only LOAN_OFFICER can access /loan-officer
+                        .requestMatchers("/appUser/**").hasRole("APPUSER")  // Only APPUSER can access /appUser
                         .anyRequest().authenticated()  // All other requests need authentication
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")  // Custom login page
-                        .defaultSuccessUrl("/home", true)  // Redirect to /home after successful login
+                        .successHandler(customAuthenticationSuccessHandler)  // Use custom success handler
                         .permitAll()
                 )
                 .logout((logout) -> logout
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/login?logout")  // Redirect to login with logout query parameter
                         .permitAll()
                 )
-                .csrf((csrf) -> csrf.disable());  // Disable CSRF for now to test
+                .csrf(csrf -> csrf.disable());  // Disable CSRF protection for development/testing; re-enable in production
 
         return http.build();
     }

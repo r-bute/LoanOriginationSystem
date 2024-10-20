@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App User Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/appUser/appUserDashboard">Dashboard</a></li>
+            <li><a href="/appUser/profile">Profile</a></li>
+            <li><a href="/appUser/loanApplications">Loan Applications</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h1>App User Dashboard</h1>
+        <p>Welcome to your dashboard. Here you can manage your profile and view your loan applications.</p>
+    </section>
+</main>
+
+<footer>
+    <p>© 2024 Loan Origination System. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
