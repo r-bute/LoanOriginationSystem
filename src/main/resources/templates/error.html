@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Error - Loan Origination System</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <ul>
+      <li><a href="/" th:href="@{/}">Home</a></li>
+      <li><a href="/login" th:href="@{/login}">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h1>Oops! Something went wrong.</h1>
+    <p>We encountered an unexpected error. Please try again later.</p>
+    <a href="/" th:href="@{/}" class="btn">Go to Home</a>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2024 Loan Origination System. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

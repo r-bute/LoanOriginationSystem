@@ -26,7 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/register", "/login", "/error", "/css/**", "/js/**").permitAll()  // Allow public access to these pages
+                        .requestMatchers("/", "/login", "/about", "/contact","/error", "/css/**", "/js/**").permitAll()  // Allow public access to these pages
                         .requestMatchers("/admin/**").hasRole("ADMIN")  // Only ADMIN can access /admin
                         .requestMatchers("/manager/**").hasRole("MANAGER")  // Only MANAGER can access /manager
                         .requestMatchers("/underwriter/**").hasRole("UNDERWRITER")  // Only UNDERWRITER can access /underwriter

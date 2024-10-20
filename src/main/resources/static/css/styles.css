@@ -1,51 +1,107 @@
+/* General styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
 }
 
 header {
-    background-color: #1a3d7f; /* Dark Blue */
-    padding: 15px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
 }
 
-.navbar ul {
+nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: space-around;
+    text-align: right;
 }
 
-.navbar ul li {
+nav ul li {
     display: inline;
+    margin-right: 10px;
 }
 
-.navbar ul li a {
-    color: #f0d64f; /* Gold */
+nav ul li a {
+    color: white;
     text-decoration: none;
-    font-weight: bold;
-}
-
-.navbar ul li a:hover {
-    text-decoration: underline;
 }
 
 main {
     padding: 20px;
 }
 
-h1, h2 {
-    color: #1a3d7f; /* Dark Blue */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Login form styling */
+.login-container {
+    background-color: white;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.login-container h1 {
+    text-align: center;
+    color: #333;
+}
+
+.login-container p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
 }
 
 footer {
-    background-color: #1a3d7f;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
+    position: relative;
     bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a href="/" th:href="@{/}">Home</a></li>
+      <li><a href="/about" th:href="@{/about}">About Us</a></li>
+      <li><a href="/contact" th:href="@{/contact}">Contact Us</a></li>
+      <li><a href="/login" th:href="@{/login}">Login</a></li>
+      <li><a href="/register" th:href="@{/register}">Register</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="contact-container">
+    <h1>Contact Us</h1>
+    <p>We’re here to help! Feel free to reach out to us through one of our global offices:</p>
+
+    <h2>Our Offices</h2>
+    <ul>
+      <li><strong>New York, USA</strong>: +1 212-555-1234</li>
+      <li><strong>London, UK</strong>: +44 20-7946-0958</li>
+      <li><strong>Sydney, Australia</strong>: +61 2-9990-3000</li>
+      <li><strong>Hong Kong</strong>: +852 3107 1000</li>
+      <li><strong>Harare, Zimbabwe</strong>: +263 242-770-123</li>
+      <li><strong>São Paulo, Brazil</strong>: +55 11-3255-5000</li>
+    </ul>
+
+    <h2>Email Us</h2>
+    <p>You can also contact us via email at <a href="mailto:support@loanorigination.com">support@loanorigination.com</a>.</p>
+
+    <h2>Business Hours</h2>
+    <p>Monday - Friday: 9 AM - 6 PM (local time)</p>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2024 Loan Origination System. All rights reserved.</p>
+</footer>
+</body>
+</html>

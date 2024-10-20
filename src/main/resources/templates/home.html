@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Loan Origination System</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1>Welcome Home!</h1>
-<p>You have successfully logged in.</p>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/" th:href="@{/}">Home</a></li>
+            <li><a href="/about" th:href="@{/about}">About</a></li>
+            <li><a href="/contact" th:href="@{/contact}">Contact</a></li>
+            <li><a href="/login" th:href="@{/login}">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <h1>Welcome to the Loan Origination System</h1>
+        <p>Efficient, secure, and easy-to-use loan management for professionals.</p>
+        <a href="/login" th:href="@{/login}" class="cta-button">Get Started</a>
+    </section>
+
+    <section class="features">
+        <div class="feature-box">
+            <h2>Simple Loan Management</h2>
+            <p>Manage loans, track progress, and collaborate with ease.</p>
+        </div>
+        <div class="feature-box">
+            <h2>Secure and Reliable</h2>
+            <p>Your data is protected with state-of-the-art encryption and security standards.</p>
+        </div>
+        <div class="feature-box">
+            <h2>Tailored for Professionals</h2>
+            <p>Our platform is designed with managers, loan officers, and underwriters in mind.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Loan Origination System. All rights reserved.</p>
+</footer>
 </body>
 </html>

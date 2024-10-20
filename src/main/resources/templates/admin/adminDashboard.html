@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +8,45 @@
 </head>
 <body>
 <header>
-    <nav class="navbar">
+    <nav>
         <ul>
-            <li><a href="/admin/adminDashboard">Dashboard</a></li>
-            <li><a href="/admin/manageUsers">Manage Users</a></li>
-            <li><a href="/admin/settings">Settings</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/admin/adminDashboard" th:href="@{/admin/adminDashboard}">Dashboard</a></li>
+            <li><a href="/admin/register" th:href="@{/register}">Register New User</a></li>
+            <li><a href="/logout" th:href="@{/logout}">Logout</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
-    <section>
-        <h1>Admin Dashboard</h1>
-        <p>Welcome to the Admin Dashboard! Here you can manage users, view reports, and access administrative settings.</p>
-    </section>
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, Admin! From here, you can manage users and review loan applications.</p>
 
-    <section>
-        <h2>Admin Actions</h2>
-        <ul>
-            <li><a href="/admin/manageUsers">Manage Users</a></li>
-            <li><a href="/admin/reports">View Reports</a></li>
-            <li><a href="/admin/settings">Settings</a></li>
-        </ul>
-    </section>
+    <h2>Register a New User</h2>
+    <form action="#" th:action="@{/register}" th:object="${appUser}" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" th:field="*{username}" placeholder="Enter username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" th:field="*{password}" placeholder="Enter password" required>
+        </div>
+        <div>
+            <label for="role">Role:</label>
+            <select th:field="*{role}">
+                <option value="ROLE_ADMIN">Admin</option>
+                <option value="ROLE_MANAGER">Manager</option>
+                <option value="ROLE_UNDERWRITER">Underwriter</option>
+                <option value="ROLE_LOAN_OFFICER">Loan Officer</option>
+                <option value="ROLE_APPUSER">App User</option>
+            </select>
+        </div>
+        <button type="submit">Register User</button>
+    </form>
 </main>
 
 <footer>
-    <p>© 2024 Loan Origination System. All Rights Reserved.</p>
+    <p>&copy; 2024 Loan Origination System. All rights reserved.</p>
 </footer>
 </body>
 </html>
