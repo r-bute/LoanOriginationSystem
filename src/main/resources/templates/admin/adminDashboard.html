@@ -5,13 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* Flexbox grid layout */
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Each box styling */
+        .dashboard-box {
+            flex: 1 1 calc(33% - 40px); /* Three boxes per row */
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-box h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .user-list table, .loan-application-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .user-list th, .user-list td, .loan-application-list th, .loan-application-list td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .summary-statistics ul, .activity-logs ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .summary-statistics li, .activity-logs li {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .dashboard-box {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 <header>
     <nav>
         <ul>
-            <li><a href="/admin/adminDashboard" th:href="@{/admin/adminDashboard}">Dashboard</a></li>
-            <li><a href="/admin/register" th:href="@{/register}">Register New User</a></li>
+            <li><a href="/" th:href="@{/}">Home</a></li>
+            <li><a href="/admin/register" th:href="@{/admin/register}">Register New User</a></li>
             <li><a href="/logout" th:href="@{/logout}">Logout</a></li>
         </ul>
     </nav>
@@ -19,30 +69,99 @@
 
 <main>
     <h1>Admin Dashboard</h1>
-    <p>Welcome, Admin! From here, you can manage users and review loan applications.</p>
+    <p>Welcome, Admin! You can manage users and loan applications from this page.</p>
 
-    <h2>Register a New User</h2>
-    <form action="#" th:action="@{/register}" th:object="${appUser}" method="post">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" th:field="*{username}" placeholder="Enter username" required>
+    <!-- Flexible Dashboard Layout -->
+    <div class="dashboard-container">
+
+        <!-- User Management Section -->
+        <div class="dashboard-box">
+            <h2>Manage Users</h2>
+            <div class="user-list">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.username}">Username</td>
+                        <td th:text="${user.role}">Role</td>
+                        <td th:text="${user.active ? 'Active' : 'Frozen'}">Status</td>
+                        <td>
+                            <a href="#" th:href="@{/admin/editUser/{id}(id=${user.id})}">Edit</a> |
+                            <a href="#" th:href="@{/admin/deleteUser/{id}(id=${user.id})}" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a> |
+                            <a href="#" th:href="@{/admin/freezeUser/{id}(id=${user.id})}" th:text="${user.active ? 'Freeze Access' : 'Unfreeze Access'}"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" th:field="*{password}" placeholder="Enter password" required>
+
+        <!-- Loan Application Management Section -->
+        <div class="dashboard-box">
+            <h2>Manage Loan Applications</h2>
+            <div class="loan-application-list">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Status</th>
+                        <th>Assigned Officer</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="application : ${loanApplications}">
+                        <td th:text="${application.id}">App ID</td>
+                        <td th:text="${application.status}">Status</td>
+                        <td th:text="${application.officer}">Officer</td>
+                        <td>
+                            <a href="#" th:href="@{/admin/viewApplication/{id}(id=${application.id})}">View</a> |
+                            <a href="#" th:href="@{/admin/assignOfficer/{id}(id=${application.id})}">Assign Officer</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div>
-            <label for="role">Role:</label>
-            <select th:field="*{role}">
-                <option value="ROLE_ADMIN">Admin</option>
-                <option value="ROLE_MANAGER">Manager</option>
-                <option value="ROLE_UNDERWRITER">Underwriter</option>
-                <option value="ROLE_LOAN_OFFICER">Loan Officer</option>
-                <option value="ROLE_APPUSER">App User</option>
-            </select>
+
+        <!-- Summary Statistics Section -->
+        <div class="dashboard-box summary-statistics">
+            <h2>Summary Statistics</h2>
+            <ul>
+                <li>Total Users: <span th:text="${totalUsers}">0</span></li>
+                <li>Total Loan Applications: <span th:text="${totalApplications}">0</span></li>
+                <li>Pending Loan Applications: <span th:text="${pendingApplications}">0</span></li>
+                <li>Approved Loan Applications: <span th:text="${approvedApplications}">0</span></li>
+            </ul>
         </div>
-        <button type="submit">Register User</button>
-    </form>
+
+        <!-- Activity Logs Section -->
+        <div class="dashboard-box activity-logs">
+            <h2>Recent Activities</h2>
+            <ul>
+                <li th:each="log : ${activityLogs}">
+                    <span th:text="${log.timestamp}">[Timestamp]</span> - <span th:text="${log.message}">Activity message</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="dashboard-box">
+            <h2>Search Users or Applications</h2>
+            <form action="#" th:action="@{/admin/search}" method="get">
+                <input type="text" name="query" placeholder="Search by username or application ID">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+    </div> <!-- End of dashboard container -->
 </main>
 
 <footer>

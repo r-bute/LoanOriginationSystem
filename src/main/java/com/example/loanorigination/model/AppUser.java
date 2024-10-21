@@ -5,10 +5,11 @@ import lombok.*;
 
 @Entity
 @Table(name = "app_users")
-@Data // Lombok annotation to generate getters, setters, toString, etc.
+@Data  // Lombok will generate getters, setters, toString, etc.
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppUser {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,11 +20,14 @@ public class AppUser {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)  // Store roles as strings in the database
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
-    // Enum for different roles
+    @Column(nullable = false)
+    private boolean active = true;  // Add active status field
+
+    // Enum for roles
     public enum Role {
         APPUSER,
         LOAN_OFFICER,

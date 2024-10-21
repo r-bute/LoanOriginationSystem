@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New User</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/admin/adminDashboard" th:href="@{/admin/adminDashboard}">Dashboard</a></li>
+            <li><a href="/logout" th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Register a New User</h1>
+
+    <!-- Form is styled to align with your existing layout -->
+    <div class="form-container">
+        <form action="#" th:action="@{/admin/register}" th:object="${appUser}" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" th:field="*{username}" placeholder="Enter username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" th:field="*{password}" placeholder="Enter password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" th:field="*{role}">
+                    <option value="APPUSER">App User</option>
+                    <option value="LOAN_OFFICER">Loan Officer</option>
+                    <option value="MANAGER">Manager</option>
+                    <option value="UNDERWRITER">Underwriter</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Register User</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Loan Origination System. All rights reserved.</p>
+</footer>
+</body>
+</html>

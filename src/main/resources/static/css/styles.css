@@ -131,20 +131,35 @@ form {
     margin: 20px 0;
 }
 
+/* Form Styling */
+form {
+    margin: 20px auto; /* Center the form horizontally */
+    max-width: 400px;  /* Set a maximum width for the form */
+    padding: 20px;     /* Add padding inside the form */
+    background-color: #fff;  /* White background for form */
+    border-radius: 8px;      /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for elevation */
+}
+
 form div {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: left; /* Align text to the left */
 }
 
 form label {
     font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
 }
 
 form input[type="text"],
 form input[type="password"],
 form select {
-    padding: 8px;
-    width: 100%;
+    padding: 10px;
+    width: 100%;  /* Make the input fields take the full width of the form */
     box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 form button {
@@ -154,12 +169,14 @@ form button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;  /* Button takes the full width of the form */
 }
 
 form button:hover {
     background-color: #002244;
     color: #fff;
 }
+
 
 /* Footer Styles */
 footer {
@@ -186,3 +203,72 @@ footer {
     font-size: 1.2em;
     line-height: 1.5;
 }
+
+/*editUser styling*/
+/* Center the form */
+.edit-user-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-user-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.form-group button:hover {
+    background-color: #4cae4c;
+}
+
+.form-group a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .edit-user-container {
+        width: 90%;
+    }
+}
+

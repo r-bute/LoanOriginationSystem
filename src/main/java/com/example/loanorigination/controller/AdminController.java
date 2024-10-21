@@ -3,10 +3,13 @@ package com.example.loanorigination.controller;
 import com.example.loanorigination.model.AppUser;
 import com.example.loanorigination.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AdminController {
@@ -18,23 +21,67 @@ public class AdminController {
         this.appUserService = appUserService;
     }
 
-    // Display the admin dashboard
+    // Admin Dashboard: Display all users
     @GetMapping("/admin/adminDashboard")
     public String showAdminDashboard(Model model) {
-        // Add an empty AppUser object for form binding in the view
-        model.addAttribute("appUser", new AppUser());
-        return "admin/adminDashboard"; // Return the view for the admin dashboard
+        List<AppUser> users = appUserService.getAllUsers();
+        model.addAttribute("users", users);
+        return "admin/adminDashboard";
     }
 
-    // Handle user registration from the admin dashboard
-    @PostMapping("/admin/createUser")
-    public String createUser(AppUser appUser, Model model) {
-        // Register a new user via the service
-        appUserService.registerUser(appUser);
-
-        // Add success message or feedback
-        model.addAttribute("successMessage", "User created successfully!");
-
-        return "redirect:/admin/adminDashboard";  // Redirect to admin dashboard after user creation
+    // Display edit user form
+    @GetMapping("/admin/editUser/{id}")
+    public String showEditUserForm(@PathVariable Long id, Model model) {
+        Optional<AppUser> userOptional = appUserService.getUserById(id);
+        if (userOptional.isPresent()) {
+            model.addAttribute("appUser", userOptional.get());
+            return "admin/editUser";
+        } else {
+            return "redirect:/error";  // Custom error page if user ID not found
+        }
     }
+
+    // Handle user update
+    @PostMapping("/admin/updateUser/{id}")
+    public String updateUser(@PathVariable Long id, @ModelAttribute("appUser") AppUser updatedUser) {
+        appUserService.updateUser(id, updatedUser);
+        return "redirect:/admin/adminDashboard";
+    }
+
+    // Handle user deletion
+    @GetMapping("/admin/deleteUser/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        appUserService.deleteUser(id);
+        return "redirect:/admin/adminDashboard";
+    }
+
+    // Toggle freeze/unfreeze status
+    @GetMapping("/admin/freezeUser/{id}")
+    public String toggleUserStatus(@PathVariable Long id) {
+        appUserService.toggleUserStatus(id);
+        return "redirect:/admin/adminDashboard";
+    }
+
+    // Search users by username
+    @GetMapping("/admin/search")
+    public String searchUsers(@RequestParam("query") String query, Model model) {
+        List<AppUser> searchResults = appUserService.searchUsersByUsername(query);
+        model.addAttribute("users", searchResults);
+        return "admin/adminDashboard";
+    }
+
+    // Pagination
+    @GetMapping("/admin/users")
+    public String listUsersPaginated(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            Model model) {
+
+        Page<AppUser> usersPage = appUserService.getUsersPaginated(page, size);
+        model.addAttribute("users", usersPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usersPage.getTotalPages());
+        return "admin/adminDashboard";
+    }
+
 }

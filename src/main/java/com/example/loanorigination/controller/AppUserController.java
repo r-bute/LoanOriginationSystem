@@ -20,13 +20,6 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
-    // Display the registration form
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("appUser", new AppUser());
-        return "register";  // Thymeleaf template for registration page
-    }
-
     // Process the registration form submission
     @PostMapping("/register")
     public String registerUser(AppUser appUser) {

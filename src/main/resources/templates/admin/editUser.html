@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit User</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a href="/admin/adminDashboard" th:href="@{/admin/adminDashboard}">Dashboard</a></li>
+      <li><a href="/logout" th:href="@{/logout}">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="edit-user-container">
+  <h2>Edit User Details</h2>
+  <form th:action="@{/admin/updateUser/{id}(id=${appUser.id})}" th:object="${appUser}" method="post">
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" th:field="*{username}" placeholder="Enter new username" required>
+    </div>
+
+    <!-- Role -->
+    <div class="form-group">
+      <label for="role">Role:</label>
+      <select id="role" th:field="*{role}">
+        <option value="APPUSER" th:selected="${appUser.role == 'APPUSER'}">App User</option>
+        <option value="LOAN_OFFICER" th:selected="${appUser.role == 'LOAN_OFFICER'}">Loan Officer</option>
+        <option value="MANAGER" th:selected="${appUser.role == 'MANAGER'}">Manager</option>
+        <option value="UNDERWRITER" th:selected="${appUser.role == 'UNDERWRITER'}">Underwriter</option>
+        <option value="ADMIN" th:selected="${appUser.role == 'ADMIN'}">Admin</option>
+      </select>
+    </div>
+
+    <!-- Password (optional) -->
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" th:field="*{password}" placeholder="Enter new password (optional)">
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit">Update User</button>
+    </div>
+
+    <!-- Back to Dashboard link -->
+    <div class="form-group">
+      <a th:href="@{/admin/adminDashboard}">Back to Dashboard</a>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
