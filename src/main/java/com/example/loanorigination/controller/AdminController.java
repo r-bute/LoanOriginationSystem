@@ -84,4 +84,20 @@ public class AdminController {
         return "admin/adminDashboard";
     }
 
+    // Display the register page
+    @GetMapping("/admin/register")
+    public String showRegisterPage(Model model) {
+        model.addAttribute("appUser", new AppUser());  // Add an empty AppUser object to the model
+        return "admin/register";  // Return the correct path to your register template
+    }
+
+    @PostMapping("/admin/register")
+    public String registerUser(@ModelAttribute("appUser") AppUser appUser) {
+        appUserService.registerUser(appUser);
+        return "redirect:/admin/adminDashboard";
+    }
+
+
+
+
 }
